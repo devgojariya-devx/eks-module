@@ -1,6 +1,6 @@
-resource "kubernetes_deployment" "simple_node_app"{
+resource "kubernetes_deployment" "simple_node_app" {
   metadata {
-    name = "simple-node-app"
+    name      = "simple-node-app"
     namespace = kubernetes_namespace.example.metadata[0].name
   }
   spec {
@@ -19,8 +19,8 @@ resource "kubernetes_deployment" "simple_node_app"{
       }
       spec {
         topology_spread_constraint {
-          max_skew = 1
-          topology_key = "kubernetes.io/hostname"
+          max_skew           = 1
+          topology_key       = "kubernetes.io/hostname"
           when_unsatisfiable = "DoNotSchedule"
           label_selector {
             match_labels = {
@@ -29,8 +29,8 @@ resource "kubernetes_deployment" "simple_node_app"{
           }
         }
         container {
-          image = ""
-          name = "simple-node-app"
+          image = "735902244362.dkr.ecr.ap-south-1.amazonaws.com/cbd-dev-k8s:latest"
+          name  = "simple-node-app"
           port {
             container_port = 3000
           }

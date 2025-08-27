@@ -10,7 +10,7 @@ locals {
   aws_eks_main_default = {
 
     name = "cbd-dev-cluster"
-    kubernetes_version = "1.33"
+    kubernetes_version = "1.27"
 
     addons = {
     coredns                = {}
@@ -32,16 +32,16 @@ locals {
     control_plane_subnet_ids = module.vpc[0].private_subnets
 
     eks_managed_node_groups = {
-    example = {
-     
-      ami_type       = "ami-02d26659fd82cf299"
-      instance_types = ["m8g.medium"]
+        example = {
+        
+        ami_type       = "AL2_ARM_64"
+        instance_types = ["m8g.medium"]
 
-      min_size     = 2
-      max_size     = 10
-      desired_size = 2
+        min_size     = 2
+        max_size     = 10
+        desired_size = 2
+        }
     }
-  }
 
   }
     eks_config = merge(local.aws_eks_main_default, var.aws_eks_config)

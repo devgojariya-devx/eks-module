@@ -5,34 +5,34 @@ variable "aws_vpc_config" {
 }
 
 variable "vpc_name" {
-  type = string
+  type    = string
   default = "cbd-dev"
 }
 
 variable "vpc_cidr" {
-  type = string
-  default ="10.2.0.0/16"
+  type    = string
+  default = "10.2.0.0/16"
 }
 
 variable "vpc_azs" {
-  type = list(string)
-  default = [ "ap-south-1a", "ap-south-1b" ]
+  type    = list(string)
+  default = ["ap-south-1a", "ap-south-1b"]
 }
 
 variable "vpc_private_subnets" {
-  type = list(string)
-  default = [ "10.2.128.0/20", "10.2.144.0/20" ]
+  type    = list(string)
+  default = ["10.2.128.0/20", "10.2.144.0/20"]
 }
 
 variable "vpc_public_subnets" {
-  type = list(string)
-  default = [ "10.2.0.0/20", "10.2.16.0/20" ]
+  type    = list(string)
+  default = ["10.2.0.0/20", "10.2.16.0/20"]
 }
 
 variable "flow_log_cloudwatch_log_group_retention_in_days" {
-  type = number
+  type    = number
   default = 7
-  
+
 }
 
 locals {
@@ -42,12 +42,12 @@ locals {
   aws_vpc_main_defaults = {
     #project_name                                    = var.project_name#local.vpc_project_name
     #environment                                     = var.environment#local.vpc_environment
-    vpc_name                                        = var.vpc_name#"${local.project_name}-${local.environment}-vpc"
+    vpc_name                                        = var.vpc_name #"${local.project_name}-${local.environment}-vpc"
     create_vpc                                      = true
-    vpc_cidr                                        = var.vpc_cidr#"10.2.0.0/16"
-    vpc_azs                                         = var.vpc_azs#["ap-south-1a", "ap-south-1b"]
+    vpc_cidr                                        = var.vpc_cidr #"10.2.0.0/16"
+    vpc_azs                                         = var.vpc_azs  #["ap-south-1a", "ap-south-1b"]
     vpc_public_subnets                              = var.vpc_public_subnets
-    vpc_private_subnets                             = var.vpc_private_subnets#["10.2.128.0/20", "10.2.144.0/20"]
+    vpc_private_subnets                             = var.vpc_private_subnets #["10.2.128.0/20", "10.2.144.0/20"]
     enable_dns_hostnames                            = true
     enable_dns_support                              = true
     enable_nat_gateway                              = true
@@ -58,7 +58,7 @@ locals {
     create_flow_log_cloudwatch_iam_role             = true
     create_flow_log_cloudwatch_log_group            = true
     enable_flow_log                                 = true
-    flow_log_cloudwatch_log_group_retention_in_days = var.flow_log_cloudwatch_log_group_retention_in_days#7
+    flow_log_cloudwatch_log_group_retention_in_days = var.flow_log_cloudwatch_log_group_retention_in_days #7
   }
 
   aws_vpc_main = merge(local.aws_vpc_main_defaults, var.aws_vpc_config)
@@ -96,10 +96,10 @@ module "vpc" {
   tags = {
     #Project     = local.project_name
     #Environment = local.environment
-   # Name        = "${local.project_name}-${local.environment}-vpc"
-   project = var.project_name
-   environment = var.environment
-   name = "${var.project_name}-${var.environment}-vpc"
+    # Name        = "${local.project_name}-${local.environment}-vpc"
+    project     = var.project_name
+    environment = var.environment
+    name        = "${var.project_name}-${var.environment}-vpc"
   }
 }
 
