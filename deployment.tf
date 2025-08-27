@@ -18,6 +18,16 @@ resource "kubernetes_deployment" "simple_node_app"{
         }
       }
       spec {
+        topology_spread_constraint {
+          max_skew = 1
+          topology_key = "kubernetes.io/hostname"
+          when_unsatisfiable = "DoNotSchedule"
+          label_selector {
+            match_labels = {
+              app = "simple-node-app"
+            }
+          }
+        }
         container {
           image = ""
           name = "simple-node-app"
