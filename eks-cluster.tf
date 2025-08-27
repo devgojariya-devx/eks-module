@@ -23,17 +23,17 @@ locals {
     }
   }
 
-    endpoint_public_access = true
+    endpoint_public_access = false
 
     enable_cluster_creator_admin_permissions = true
 
     vpc_id = module.vpc[0].vpc_id
     subnet_ids = module.vpc[0].private_subnets
-    control_plane_subnet_ids = module.vpc[0].vpc_private_subnets
+    control_plane_subnet_ids = module.vpc[0].private_subnets
 
     eks_managed_node_groups = {
     example = {
-      # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
+     
       ami_type       = "ami-02d26659fd82cf299"
       instance_types = ["m8g.medium"]
 
